@@ -16,7 +16,6 @@ func main() {
 	env.New()
 	router := mux.NewRouter()
 	s := router.PathPrefix("/api/v1/").Subrouter()
-
 	s.HandleFunc("/query", wa.HandleQuery).Methods("POST")
 
 	log.Fatal(http.ListenAndServe(":"+env.GetString("SERVER_PORT"), router))
