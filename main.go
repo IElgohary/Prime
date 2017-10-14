@@ -18,5 +18,8 @@ func main() {
 	// s.HandleFunc("/people/{id}", getPerson).Methods("GET")
 	// s.HandleFunc("/people/{id}", createPerson).Methods("POST")
 	// s.HandleFunc("/people/{id}", deletePerson).Methods("DELETE")
-	log.Fatal(http.ListenAndServe(":1234", router))
+	addr := ":1234"
+    // http.HandleFunc("/", MyHandler)
+    log.Println("listen on", addr)
+    log.Fatal( http.ListenAndServe(addr, router) )
 }
