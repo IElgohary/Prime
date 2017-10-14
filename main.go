@@ -4,22 +4,19 @@ import (
 	"log"
 	"net/http"
 
-	"./bundles/person"
+	"./bundles/env"
+	"./bundles/wolfram_alpha"
 	"github.com/gorilla/mux"
 )
 
 func main() {
 	// Controllers Declaration
-	pc := &person.PersonController{}
-	pc.Seed()
+
+	wa := &wolfram_alpha.WolframAlphaController{}
+	env.New()
 	router := mux.NewRouter()
 	s := router.PathPrefix("/api/v1/").Subrouter()
-	s.HandleFunc("/people", pc.GetPeople).Methods("GET")
-	// s.HandleFunc("/people/{id}", getPerson).Methods("GET")
-	// s.HandleFunc("/people/{id}", createPerson).Methods("POST")
-	// s.HandleFunc("/people/{id}", deletePerson).Methods("DELETE")
-	addr := ":1234"
-    // http.HandleFunc("/", MyHandler)
-    log.Println("listen on", addr)
-    log.Fatal( http.ListenAndServe(addr, router) )
+	s.HandleFunc("/query", wa.HandleQuery).Methods("POST")
+
+	log.Fatal(http.ListenAndServe(":"+env.GetString("SERVER_PORT"), router))
 }
