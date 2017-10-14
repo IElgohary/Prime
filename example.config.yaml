@@ -1,0 +1,15 @@
+env: development
+development:
+    SITE_URL: env.dev
+    SERVER_PORT: 1234
+    APP_ID: 
+    BASE_URL: http://api.wolframalpha.com/v2/query?output=json
+production: 
+    SITE_URL: env.com
+    SERVER_PORT: 80
+    APP_ID: 
+    BASE_URL: http://api.wolframalpha.com/v2/query?output=json
+test:
+    SITE_URL: env.test
+    SERVER_PORT: 8080
+
