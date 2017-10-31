@@ -1,12 +1,13 @@
 # Prime
 Advaced computer lab Project
 
-### Dependencies
-  1. gorilla/mux
-  2. Lafriakh/env
+### Test:
 
-### Run:
-
+# sync dependencies
 ```
-go run main.go
+govendor sync
+```
+# Run with fresh
+```
+fresh
 ```
