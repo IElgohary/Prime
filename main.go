@@ -1,14 +1,12 @@
 package main
 
 import (
+	"Prime/bundles/chatbot"
+	"Prime/bundles/wolfram_alpha"
 	"errors"
 	"fmt"
 	"log"
 	"os"
-
-	"Prime/bundles/wolfram_alpha"
-
-	"Prime/bundles/chatbot"
 	// Autoload environment variables in .env
 	_ "github.com/joho/godotenv/autoload"
 )
@@ -40,6 +38,7 @@ func chatbotProcess(session chatbot.Session, message string) (string, error) {
 
 	// Initialize controller
 	wa := &wolfram_alpha.WolframAlphaController{}
+
 	// Use Wolfram Alpha API
 	response, _ := wa.HandleQuery(message)
 

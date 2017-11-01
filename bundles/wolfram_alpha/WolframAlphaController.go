@@ -1,11 +1,11 @@
 package wolfram_alpha
 
 import (
+	"Prime/bundles/common"
 	"encoding/json"
 	"net/http"
+	url "net/url"
 	"os"
-
-	"Prime/bundles/common"
 )
 
 type WolframAlphaController struct {
@@ -16,8 +16,9 @@ func (c *WolframAlphaController) HandleQuery(message string) (*Response, error) 
 
 	// instance of response
 	response := new(Response)
+	encoded := url.QueryEscape(message)
 	// send http request to wolfram alpha api
-	url := os.Getenv("BASE_URL") + "&input=" + message + "&appid=" + os.Getenv("APP_ID") + "&includepodid=Result"
+	url := os.Getenv("BASE_URL") + "&input=" + encoded + "&appid=" + os.Getenv("APP_ID") + "&includepodid=Result"
 	resp, err := http.Get(url)
 	defer resp.Body.Close()
 	if err != nil {
