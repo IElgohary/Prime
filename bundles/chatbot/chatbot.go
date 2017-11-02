@@ -12,7 +12,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gorilla/mux"
+	cors "github.com/heppu/simple-cors"
 )
 
 var (
@@ -181,20 +181,20 @@ func handle(w http.ResponseWriter, r *http.Request) {
 
 // Engage Gives control to the chatbot
 func Engage(addr string) error {
-	router := mux.NewRouter()
-	s := router.PathPrefix("/api/v1/").Subrouter()
-	s.HandleFunc("/chat", handleChat).Methods("POST")
-	s.HandleFunc("/welcome", handleWelcome).Methods("POST", "GET")
-	s.HandleFunc("/", handleChat).Methods("handle")
+	// router := mux.NewRouter()
+	// s := router.PathPrefix("/api/v1/").Subrouter()
+	// s.HandleFunc("/chat", handleChat).Methods("POST")
+	// s.HandleFunc("/welcome", handleWelcome).Methods("POST", "GET")
+	// s.HandleFunc("/", handleChat).Methods("handle")
 
-	return http.ListenAndServe(addr, router)
+	// return http.ListenAndServe(addr, router)
 	// HandleFuncs
-	// mux := http.NewServeMux()
+	mux := http.NewServeMux()
 
-	// mux.HandleFunc("/welcome", withLog(handleWelcome))
-	// mux.HandleFunc("/chat", withLog(handleChat))
-	// mux.HandleFunc("/", withLog(handle))
+	mux.HandleFunc("/welcome", withLog(handleWelcome))
+	mux.HandleFunc("/chat", withLog(handleChat))
+	mux.HandleFunc("/", withLog(handle))
 
-	// // Start the server
-	// return http.ListenAndServe(addr, cors.CORS(mux))
+	// Start the server
+	return http.ListenAndServe(addr, cors.CORS(mux))
 }
