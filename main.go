@@ -40,10 +40,10 @@ func chatbotProcess(session chatbot.Session, message string) (string, error) {
 	wa := &wolfram_alpha.WolframAlphaController{}
 
 	// Use Wolfram Alpha API
-	response, _ := wa.HandleQuery(message)
+	response, err := wa.HandleQuery(message)
 
 	// Check for errors
-	if response.QueryResult.Success != true {
+	if err != nil || response.QueryResult.Success != true {
 		return "", errors.New("Your Query " + message + " is invalid!")
 	}
 
